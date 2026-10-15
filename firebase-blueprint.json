@@ -1,0 +1,78 @@
+{
+  "entities": {
+    "User": {
+      "title": "User Profile",
+      "description": "Public and private user profile data",
+      "type": "object",
+      "properties": {
+        "userId": { "type": "string", "description": "The Firebase UID" },
+        "username": { "type": "string", "description": "Unique handle" },
+        "name": { "type": "string", "description": "Display name" },
+        "avatarUrl": { "type": "string", "description": "URL to profile image" },
+        "isOnline": { "type": "boolean", "description": "Whether user is currently connected" },
+        "lastActive": { "type": "string", "format": "date-time", "description": "Last heartbeat timestamp" },
+        "createdAt": { "type": "string", "format": "date-time", "description": "Account creation timestamp" }
+      },
+      "required": ["userId", "username", "name", "createdAt"]
+    },
+    "Room": {
+      "title": "Voice Room",
+      "description": "Metadata for a group voice channel",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "name": { "type": "string" },
+        "hostId": { "type": "string" },
+        "isLocked": { "type": "boolean" },
+        "password": { "type": "string" },
+        "createdAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["id", "name", "hostId", "createdAt"]
+    },
+    "Message": {
+      "title": "Chat Message",
+      "description": "A single message in a room or private chat",
+      "type": "object",
+      "properties": {
+        "senderId": { "type": "string" },
+        "senderName": { "type": "string" },
+        "text": { "type": "string" },
+        "avatarUrl": { "type": "string" },
+        "timestamp": { "type": "string", "format": "date-time" }
+      },
+      "required": ["senderId", "senderName", "text", "timestamp"]
+    },
+    "Call": {
+      "title": "Voice Call",
+      "description": "A 1-on-1 voice call session",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "callerId": { "type": "string" },
+        "receiverId": { "type": "string" },
+        "status": { "type": "string", "enum": ["ringing", "connected", "ended", "rejected"] },
+        "channelId": { "type": "string" },
+        "timestamp": { "type": "string", "format": "date-time" }
+      },
+      "required": ["id", "callerId", "receiverId", "status", "channelId", "timestamp"]
+    }
+  },
+  "firestore": {
+    "/users/{userId}": {
+      "schema": "User",
+      "description": "User profiles"
+    },
+    "/rooms/{roomId}": {
+      "schema": "Room",
+      "description": "Group voice rooms"
+    },
+    "/rooms/{roomId}/messages/{messageId}": {
+      "schema": "Message",
+      "description": "Room chat history"
+    },
+    "/calls/{callId}": {
+      "schema": "Call",
+      "description": "One-on-one call sessions"
+    }
+  }
+}

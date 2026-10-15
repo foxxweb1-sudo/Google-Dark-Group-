@@ -1,0 +1,61 @@
+rules_version = '2';
+
+service cloud.firestore {
+  match /databases/{database}/documents {
+    // 1. Global Deny-All fallback
+    match /{document=**} {
+      allow read, write: if false;
+    }
+
+    // --- SHARED HELPERS ---
+    function isSignedIn() { return request.auth != null; }
+    function isOwner(userId) { return isSignedIn() && request.auth.uid == userId; }
+
+    // --- COLLECTION RULES ---
+
+    // USERS (Allow reading profiles for search, username verification, and friends)
+    match /users/{userId} {
+      allow read: if true;
+      allow create, update: if isSignedIn() && request.auth.uid == userId;
+      allow delete: if isOwner(userId);
+    }
+
+    // FORUM (Public community discussion)
+    match /forum/{messageId} {
+      allow read: if true;
+      allow create: if isSignedIn();
+      allow delete: if isSignedIn() && (resource.data.senderId == request.auth.uid || resource.data.userId == request.auth.uid);
+    }
+
+    // ROOMS
+    match /rooms/{roomId} {
+      allow read: if true;
+      allow create: if isSignedIn();
+      allow update: if isSignedIn();
+      allow delete: if isSignedIn() && resource.data.hostId == request.auth.uid;
+
+      // ROOM MEMBERS (User registration & voice status in room)
+      match /members/{memberId} {
+        allow read: if true;
+        allow create, update: if isSignedIn();
+        allow delete: if isSignedIn();
+      }
+
+      // ROOM MESSAGES (Includes chat and system join/leave banners)
+      match /messages/{messageId} {
+        allow read: if true;
+        allow create: if isSignedIn();
+        allow delete: if isSignedIn();
+      }
+    }
+
+    // CALLS
+    match /calls/{callId} {
+      allow read: if isSignedIn();
+      allow create: if isSignedIn();
+      allow update: if isSignedIn();
+      allow delete: if isSignedIn();
+    }
+  }
+}
+

@@ -1,0 +1,6 @@
+{
+  "name": "Dark Group",
+  "description": "منظومة الاتصال الصوتي الفوري والمشفر مع غرف المحادثة المباشرة",
+  "requestFramePermissions": ["microphone"],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

@@ -1,11 +1,12 @@
-<div align="center">
+# Dark Group (مجموعة الظلام المشفرة)
 
-<img width="1200" height="475" alt="GHBanner" src="https://github.com/user-attachments/assets/0aa67016-6eaf-458a-adb2-6e31a0763ed6" />
+منظومة الاتصال الصوتي الفوري والمشفر مع غرف المحادثة المباشرة، تمت إعادة برمجتها بالكامل إلى تطبيق ويب متكامل بتقنيات React و TypeScript و Tailwind CSS و Vite.
 
-  <h1>Built with AI Studio</h2>
-
-  <p>The fastest path from prompt to production with Gemini.</p>
-
-  <a href="https://aistudio.google.com/apps">Start building</a>
-
-</div>
+## المميزات الأساسية
+- **غرف المحادثة المشفرة (Encrypted Rooms)**: إنشاء غرف صوتية محمية بكلمة مرور أو مفتوحة مع تشفير المحادثات.
+- **محرك الصوت الفوري (Web Voice Engine)**: اتصال صوتي مباشر مع مؤشرات ترددات تفاعلية، كتم الصوت (Mute) وكتم الاستماع (Deafen).
+- **المكالمات الفردية (1-on-1 Encrypted Calls)**: رنين صوتي واقعي عبر Web Audio API مع واجهة اتصال وتوقيت مباشر.
+- **المحادثات الخاصة (Private Direct Messaging)**: رسائل نصية ورسائل صوتية مسجلة مع إمكانية الحذف لدى الجميع أو محلياً.
+- **شبكة الأصدقاء (Friends & Requests)**: البحث عن المستخدمين، إرسال واستقبال طلبات الصداقة، والحظر.
+- **المنتدى العام (Public Cyber Forum)**: نشر ومشاركة المواضيع التقنية لرواد المنظومة.
+- **تصميم سايبربنك عصري (Cyber Dark UI)**: واجهة عربية متناسقة بألوان وتأثيرات ضوئية حديثة.
